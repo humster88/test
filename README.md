@@ -1,1 +1,1 @@
-# test
+Repository for test exercise.
