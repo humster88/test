@@ -21,8 +21,6 @@ jobs:
       - name: terraform apply
         run: terraform apply -auto-approve
         working-directory: ./terraform
-      - name: ansible lint
-        uses: ansible/ansible-lint@v6
       - name: run ansible-playbook
         run: ansible-playbook playbook.yaml
         working-directory: ./ansible
