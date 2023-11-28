@@ -12,6 +12,9 @@ jobs:
     steps:
       - name: checkout repo
         uses: actions/checkout@v4
+      - name: terraform init
+        run: terraform init
+        working-directory: ./terraform
       - name: terraform validate
         run: terraform validate
         working-directory: ./terraform
