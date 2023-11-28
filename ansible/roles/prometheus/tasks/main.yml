@@ -1,7 +1,7 @@
 ---
 # tasks file for prometheus
 - name: Put SELinux in permissive mode, logging actions that would be blocked.
-  selinux:
+  ansible.posix.selinux:
     policy: targeted
     state: permissive
   become: yes
