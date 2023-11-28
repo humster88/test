@@ -1,6 +1,6 @@
 - name: configure nginx vms
   hosts: nginx
-  gather_facts: yes
+  gather_facts: no
   become: yes
 
   tasks:
@@ -10,7 +10,7 @@
 
 - name: configure haproxy vm
   hosts: haproxy
-  gather_facts: yes
+  gather_facts: no
   become: yes
 
   tasks:
@@ -20,7 +20,7 @@
 
 - name: configure prometheus vm
   hosts: prometheus
-  gather_facts: yes
+  gather_facts: no
   become: yes
 
   tasks:
