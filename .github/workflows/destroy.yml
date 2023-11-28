@@ -1,0 +1,11 @@
+name: destroy
+run-name: ${{ github.actor }} start destroy
+on:
+  workflow_dispatch:
+jobs:
+  destroy:
+    runs-on: self-hosted
+    steps:
+      - name: terraform destroy
+        run: terraform destroy -auto-approve
+        working-directory: ./terraform
