@@ -1,0 +1,43 @@
+---
+# tasks file for nginx
+- name: Install nginx and docker.
+  package:
+    name:
+      - nginx
+      - docker-ce
+      - python3-docker
+    state: present
+  become: yes
+  notify:
+    - docker start
+- name: Force all notified handlers to run at this point, not waiting for normal sync points
+  meta: flush_handlers
+- name: Enable status page.
+  copy:
+    src: status.conf
+    dest: /etc/nginx/conf.d/status.conf
+    mode: 0644
+    owner: root
+    group: root
+    force: yes
+  become: yes
+- name: Replace html.
+  template:
+    src: index.html.j2
+    dest: /usr/share/nginx/html/index.html
+    follow: yes
+    force: yes
+  become: yes
+  notify:
+    - nginx start
+- name: Force all notified handlers to run at this point, not waiting for normal sync points
+  meta: flush_handlers
+- name: Start nginx-prometheus-exporter
+  docker_container:
+    name: nginx-prometheus-exporter
+    image: nginx/nginx-prometheus-exporter:0.10.0
+    ports:
+     - "9113:9113"
+    restart_policy: always
+    command: "-nginx.scrape-uri=http://{{ ansible_default_ipv4.address }}:8080/stub_status"
+  become: yes

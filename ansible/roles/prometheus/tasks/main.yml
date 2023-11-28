@@ -1,0 +1,28 @@
+---
+# tasks file for prometheus
+- name: Put SELinux in permissive mode, logging actions that would be blocked.
+  selinux:
+    policy: targeted
+    state: permissive
+  become: yes
+- name: Install prometheus.
+  package:
+    name: golang-github-prometheus
+    state: present
+  become: yes
+- name: Replace prometheus config.
+  copy:
+    src: prometheus.yml
+    dest: /etc/prometheus/prometheus.yml
+    force: yes
+  become: yes
+  notify:
+    - prometheus start
+- name: Replace rules config.
+  copy:
+    src: rules.yml
+    dest: /etc/prometheus/rules.yml
+    force: yes
+  become: yes
+  notify:
+    - prometheus start

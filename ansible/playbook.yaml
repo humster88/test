@@ -1,0 +1,29 @@
+- name: configure nginx vms
+  hosts: nginx
+  gather_facts: yes
+  become: yes
+
+  tasks:
+    - name: configure nginx vms
+      import_role:
+        name: nginx
+
+- name: configure haproxy vm
+  hosts: haproxy
+  gather_facts: yes
+  become: yes
+
+  tasks:
+    - name: configure haproxy vm
+      import_role:
+        name: haproxy
+
+- name: configure prometheus vm
+  hosts: prometheus
+  gather_facts: yes
+  become: yes
+
+  tasks:
+    - name: configure prometheus vm
+      import_role:
+        name: prometheus

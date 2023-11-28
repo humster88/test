@@ -1,0 +1,10 @@
+[nginx]
+%{ for ip in nginx ~}
+${ip}
+%{ endfor ~}
+
+[haproxy]
+${haproxy}
+
+[prometheus]
+${prometheus}

@@ -1,0 +1,16 @@
+---
+# handlers file for nginx
+- name: nginx start
+  systemd:
+    name: nginx
+    enabled: yes
+    state: restarted
+    daemon_reload: yes
+  become: yes
+- name: docker start
+  systemd:
+    name: docker
+    enabled: yes
+    state: restarted
+    daemon_reload: yes
+  become: yes

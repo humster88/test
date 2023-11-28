@@ -1,0 +1,15 @@
+---
+# tasks file for haproxy
+- name: Install haproxy.
+  package:
+    name: haproxy
+    state: present
+  become: yes
+- name: Replace config.
+  copy:
+    src: haproxy.cfg
+    dest: /etc/haproxy/haproxy.cfg
+    force: yes
+  become: yes
+  notify:
+    - haproxy start
