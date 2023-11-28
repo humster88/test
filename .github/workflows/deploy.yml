@@ -20,7 +20,6 @@ jobs:
         working-directory: ./terraform
       - name: ansible lint
         uses: ansible/ansible-lint@v6
-        working-directory: ./ansible
       - name: run ansible-playbook
         run: ansible-playbook playbook.yaml
         working-directory: ./ansible
